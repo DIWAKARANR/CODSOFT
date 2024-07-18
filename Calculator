@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crescent-shaped Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .calculator {
+            background-color: darkblue;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(1, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+        }
+        
+        #display {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1.5rem;
+            color: white; /* Display output number in blue */
+            background-color: #333; /* Display background color */
+            border: none;
+            border-radius: 5px;
+            text-align: right;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        button {
+            padding: 0; /* Remove default padding */
+            width: 60px; /* Set a fixed width for the button */
+            height: 60px; /* Set a fixed height for the button */
+            border: none;
+            cursor: pointer;
+            background-color: yellow; /* Background color of the button */
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .star {
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+        
+        .crescent {
+            clip-path: circle(50% at 50%);
+        }
+        
+        button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <!-- Numeric buttons -->
+            <button class="star" onclick="addToDisplay('1')">1</button>
+            <button onclick="addToDisplay('2')">2</button>
+            <button class="star" onclick="addToDisplay('3')">3</button>
+            <button class="crescent" onclick="addToDisplay('+')">+</button>
+            <button onclick="addToDisplay('4')">4</button>
+            <button onclick="addToDisplay('5')">5</button>
+            <button onclick="addToDisplay('6')">6</button>
+            <button class="crescent" onclick="addToDisplay('-')">-</button>
+            <button class="star" onclick="addToDisplay('7')">7</button>
+            <button onclick="addToDisplay('8')">8</button>
+            <button class="star" onclick="addToDisplay('9')">9</button>
+            <button class="crescent" onclick="addToDisplay('/')">/</button>
+            <button onclick="addToDisplay('0')">0</button>
+            <button onclick="addToDisplay('*')">*</button>
+            <button onclick="clearDisplay()">AC</button>
+            <button class="circle" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function addToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+        
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+        
+        function calculate() {
+            try {
+                let result = eval(document.getElementById('display').value);
+                document.getElementById('display').value = result;
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
